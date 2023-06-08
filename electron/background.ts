@@ -23,8 +23,7 @@ async function createWindow() {
         webPreferences: {
             preload,
             nodeIntegration: true,
-            contextIsolation: false,
-            devTools: true
+            contextIsolation: false
         }
     });
 
@@ -35,25 +34,25 @@ async function createWindow() {
         win.loadURL(url);
         win.webContents.openDevTools();
     } else {
-        // const menu = Menu.buildFromTemplate(
-        //     process.platform === "darwin"
-        //         ? [
-        //               {
-        //                   label: "electron多应用示例",
-        //                   submenu: [
-        //                       {
-        //                           label: "退出",
-        //                           accelerator: "CmdOrCtrl+Q",
-        //                           click: () => {
-        //                               app.quit();
-        //                           }
-        //                       }
-        //                   ]
-        //               }
-        //           ]
-        //         : []
-        // );
-        // Menu.setApplicationMenu(menu);
+        const menu = Menu.buildFromTemplate(
+            process.platform === "darwin"
+                ? [
+                      {
+                          label: "electron多应用示例",
+                          submenu: [
+                              {
+                                  label: "退出",
+                                  accelerator: "CmdOrCtrl+Q",
+                                  click: () => {
+                                      app.quit();
+                                  }
+                              }
+                          ]
+                      }
+                  ]
+                : []
+        );
+        Menu.setApplicationMenu(menu);
 
         win.loadFile(url);
     }

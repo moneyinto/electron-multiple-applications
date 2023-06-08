@@ -7,7 +7,7 @@ import ElectronLog from "electron-log";
 window.electron = {
     downloadApplication: (application: string, url: string) => {
         return new Promise((resolve) => {
-            const applicationPath = join(__dirname, "../" + application);
+            const applicationPath = join(__dirname, "../../" + application);
             if (!existsSync(applicationPath)) mkdirSync(applicationPath);
             Axios({
                 url,
@@ -31,7 +31,7 @@ window.electron = {
     openApplication: (application: string) => {
         const applicationPath = join(
             __dirname,
-            "../" + application,
+            "../../" + application,
             "app.asar"
         );
         const isExist = existsSync(applicationPath);

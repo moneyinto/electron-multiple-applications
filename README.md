@@ -1,6 +1,6 @@
 ## electron 实现多应用动态加载
 
-### 子应用
+### 一、子应用
 #### 1、正常的网页开发打包dist
 #### 2、对打包的文件进行asar压缩
 安装命令
@@ -14,7 +14,7 @@ asar pack application app.asar
 ```
 ***【注】：改asar格式为zip格式，由于asar下载没法写入文件，这里改成zip格式，下载后重新改名为asar格式。***
 
-### 主应用
+### 二、主应用
 #### 1、应用列表配置
 ```ts
 import { message } from "ant-design-vue";

@@ -5,14 +5,17 @@ import { join } from "path";
 import ElectronLog from "electron-log";
 
 window.electron = {
-    downloadApplication: (application: string, url: string) => {
+    downloadApplication: (application: string, url: string, onDownloadProgress: (progress: number) => void) => {
         return new Promise((resolve) => {
             const applicationPath = join(__dirname, "../../" + application);
             if (!existsSync(applicationPath)) mkdirSync(applicationPath);
             Axios({
                 url,
                 method: "GET",
-                responseType: "arraybuffer"
+                responseType: "arraybuffer",
+                onDownloadProgress: (progressEvent) => {
+                    onDownloadProgress(progressEvent.progress || 0);
+                }
             })
                 .then((response) => {
                     const zipFilePath = join(applicationPath, "app.zip");

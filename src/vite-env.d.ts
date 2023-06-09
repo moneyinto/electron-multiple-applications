@@ -8,7 +8,7 @@ declare module "*.vue" {
 }
 
 type Electron = {
-    downloadApplication: (application: string, url: string) => Promise<boolean>;
+    downloadApplication: (application: string, url: string, onDownloadProgress: (progress: number) => void) => Promise<boolean>;
     openApplication: (application: string) => boolean;
 };
 

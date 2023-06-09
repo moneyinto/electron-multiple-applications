@@ -52,24 +52,24 @@ const openApplication = async (application: string, url: string) => {
                 downloadProcess.value = process * 100;
             }
         });
-        const endTime = new Date().getTime();
-        if (endTime - time < 2000) {
-            // 如果2s就下载完成，那么就模拟假的下载进度，为了看清动画效果
-            const interval = setInterval(() => {
-                if (downloadProcess.value < 100) {
-                    downloadProcess.value += 1;
-                }
-            }, 20);
-            await sleep(2000);
-            clearInterval(interval);
-        }
-        await sleep(1000);
-        downloadingApplication.value = "";
         if (isOk) {
+            const endTime = new Date().getTime();
+            if (endTime - time < 2000) {
+                // 如果2s就下载完成，那么就模拟假的下载进度，为了看清动画效果
+                const interval = setInterval(() => {
+                    if (downloadProcess.value < 100) {
+                        downloadProcess.value += 1;
+                    }
+                }, 20);
+                await sleep(2000);
+                clearInterval(interval);
+            }
+            await sleep(1000);
             window.electron.openApplication(application);
         } else {
             message.error("应用加载失败");
         }
+        downloadingApplication.value = "";
     }
 };
 </script>
